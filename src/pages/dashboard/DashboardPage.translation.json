@@ -1,0 +1,15 @@
+{
+  "title": "Dashboard",
+  "trending_section": {
+    "title": "Tendencias",
+    "loading": "Cargando tendencias...",
+    "error": "Error al cargar tendencias",
+    "retry": "Reintentar"
+  },
+  "favorite_section": {
+    "title": "Favoritos",
+    "loading": "Cargando favoritos...",
+    "error": "Error al cargar favoritos",
+    "retry": "Reintentar"
+  }
+}

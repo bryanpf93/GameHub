@@ -1,6 +1,7 @@
 import Translations from "../../DashboardPage.translation.json";
 import { Card } from "../card/Card";
 import { useTrendingList } from "./hooks/useTrendingList";
+import { CardsContainer, TrendingContainer } from "./TrendingSection.styled";
 
 export const TrendingSection = () => {
   const { trendingData, isLoading, error, refetch } = useTrendingList();
@@ -30,18 +31,21 @@ export const TrendingSection = () => {
   };
 
   return (
-    <div>
+    <TrendingContainer>
       <h2>{Translations.trending_section.title}</h2>
-      {trendingData?.map((media) => (
-        <Card
-          onClick={handleCardClick}
-          onFavorite={handleCardFavorite}
-          key={media.id}
-          title={media.title}
-          poster={media.poster}
-          date={media.first_air_date}
-        />
-      ))}
-    </div>
+
+      <CardsContainer>
+        {trendingData?.map((media) => (
+          <Card
+            onClick={handleCardClick}
+            onFavorite={handleCardFavorite}
+            key={media.id}
+            title={media.title}
+            poster={media.poster}
+            date={media.first_air_date}
+          />
+        ))}
+      </CardsContainer>
+    </TrendingContainer>
   );
 };

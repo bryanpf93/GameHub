@@ -14,7 +14,7 @@ export const Card = ({ title, poster, date, onClick, onFavorite }: CardProps) =>
   const [isFavorite, setIsFavorite] = useState(false);
 
   return (
-    <CardContainerStyled $color="yellow">
+    <CardContainerStyled $color="#16171D">
       <h2>{title}</h2>
       <ImageStyled src={poster} alt={title} />
       <p>{date}</p>

@@ -1,10 +1,9 @@
-export type TrendingItemResponse = {
+export type GameItemResponse = {
   id: number;
-  title: string;
-  first_air_date: string;
-  poster_path: string;
+  name: string;
+  background_image: string;
 };
 
-export type TrendingResponse = {
-  results: TrendingItemResponse[];
+export type GamesResponse = {
+  results: GameItemResponse[];
 };

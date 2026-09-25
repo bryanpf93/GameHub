@@ -5,27 +5,18 @@ import { Card } from "../Card";
 
 describe("Card", () => {
   it("should render correctly", () => {
-    render(<Card title="Card" poster="https://via.placeholder.com/150" date="2023-01-01" />);
+    render(<Card title="Card" poster="https://via.placeholder.com/150" />);
 
     const title = screen.getByRole("heading", { name: "Card" });
     const poster = screen.getByRole("img");
-    const date = screen.getByText("2023-01-01");
 
     expect(title).toBeInTheDocument();
     expect(poster).toBeInTheDocument();
-    expect(date).toBeInTheDocument();
   });
 
   it("should call onClick when clicked", async () => {
     const onClick = jest.fn();
-    render(
-      <Card
-        title="Card"
-        poster="https://via.placeholder.com/150"
-        date="2023-01-01"
-        onClick={onClick}
-      />
-    );
+    render(<Card title="Card" poster="https://via.placeholder.com/150" onClick={onClick} />);
 
     const button = screen.getByRole("button", { name: "Watch" });
     await userEvent.click(button);
@@ -35,14 +26,7 @@ describe("Card", () => {
 
   it("should call onFavorite when clicked", async () => {
     const onFavorite = jest.fn();
-    render(
-      <Card
-        title="Card"
-        poster="https://via.placeholder.com/150"
-        date="2023-01-01"
-        onFavorite={onFavorite}
-      />
-    );
+    render(<Card title="Card" poster="https://via.placeholder.com/150" onFavorite={onFavorite} />);
 
     const buttonFavorite = screen.getByRole("button", { name: "Favorite" });
     await userEvent.click(buttonFavorite);

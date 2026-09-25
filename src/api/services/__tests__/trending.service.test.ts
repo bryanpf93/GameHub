@@ -1,16 +1,14 @@
-import { Config } from "@/config/env";
 import type { Media } from "@/types/Media";
 
 import { getTrending } from "../trending.service";
-import type { TrendingResponse } from "../types/TrendingReponse";
+import type { GamesResponse } from "../types/TrendingReponse";
 
-const mockTrendingItemResponse: TrendingResponse = {
+const mockTrendingItemResponse: GamesResponse = {
   results: [
     {
       id: 1,
-      title: "Test Movie",
-      poster_path: "/test.jpg",
-      first_air_date: "2023-01-01"
+      name: "Test Game",
+      background_image: "https://example.com/test.jpg"
     }
   ]
 };
@@ -18,9 +16,8 @@ const mockTrendingItemResponse: TrendingResponse = {
 const mockMedia: Media[] = [
   {
     id: "1",
-    title: "Test Movie",
-    poster: `${Config.API_IMAGE_BASE_URL}/test.jpg`,
-    first_air_date: "2023-01-01"
+    title: "Test Game",
+    poster: "https://example.com/test.jpg"
   }
 ];
 

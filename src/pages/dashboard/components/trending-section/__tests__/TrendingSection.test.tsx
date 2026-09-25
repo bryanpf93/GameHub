@@ -25,8 +25,7 @@ describe("TrendingSection", () => {
         {
           id: "1",
           title: "Test",
-          poster: "/test.jpg",
-          first_air_date: "2023-01-01"
+          poster: "/test.jpg"
         }
       ],
       isLoading: false,

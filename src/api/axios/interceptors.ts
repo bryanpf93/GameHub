@@ -4,7 +4,11 @@ import { api } from "./axios";
 
 api.interceptors.request.use(
   (config) => {
-    config.headers.Authorization = `Bearer ${Config.API_KEY}`;
+    config.params = {
+      ...config.params,
+      key: Config.API_KEY
+    };
+
     return config;
   },
   (error) => Promise.reject(error)

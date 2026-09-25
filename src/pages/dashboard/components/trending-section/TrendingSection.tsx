@@ -42,7 +42,6 @@ export const TrendingSection = () => {
             key={media.id}
             title={media.title}
             poster={media.poster}
-            date={media.first_air_date}
           />
         ))}
       </CardsContainer>

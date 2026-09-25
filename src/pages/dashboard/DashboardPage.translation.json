@@ -1,9 +1,9 @@
 {
   "title": "Dashboard",
-  "trending_section": {
-    "title": "Tendencias",
-    "loading": "Cargando tendencias...",
-    "error": "Error al cargar tendencias",
+  "games_section": {
+    "title": "Juegos",
+    "loading": "Cargando juegos...",
+    "error": "Error al cargar juegos",
     "retry": "Reintentar"
   },
   "favorite_section": {

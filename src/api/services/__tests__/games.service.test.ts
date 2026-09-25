@@ -1,7 +1,7 @@
 import type { Media } from "@/types/Media";
 
-import { getTrending } from "../trending.service";
-import type { GamesResponse } from "../types/TrendingReponse";
+import { getGames } from "../games.service";
+import { GamesResponse } from "../types/GamesResponse";
 
 const mockTrendingItemResponse: GamesResponse = {
   results: [
@@ -30,7 +30,7 @@ jest.mock("@/api/axios/axios", () => ({
 
 describe("trending.service", () => {
   it("should map trending items", async () => {
-    const result = await getTrending();
+    const result = await getGames();
     const expected = mockMedia;
 
     expect(result).toEqual(expected);

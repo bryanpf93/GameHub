@@ -1,20 +1,20 @@
 import Translations from "../../DashboardPage.translation.json";
 import { Card } from "../card/Card";
-import { useTrendingList } from "./hooks/useTrendingList";
-import { CardsContainer, TrendingContainer } from "./TrendingSection.styled";
+import { CardsContainer, GamesContainer } from "./GamesSection.styled";
+import { useGamesList } from "./hooks/useGamesList";
 
-export const TrendingSection = () => {
-  const { trendingData, isLoading, error, refetch } = useTrendingList();
+export const GamesSection = () => {
+  const { gamesData, isLoading, error, refetch } = useGamesList();
 
   if (isLoading) {
-    return <div>{Translations.trending_section.loading}</div>;
+    return <div>{Translations.games_section.loading}</div>;
   }
 
   if (error) {
     return (
       <div>
-        {Translations.trending_section.error}
-        <button onClick={() => refetch()}>{Translations.trending_section.retry}</button>
+        {Translations.games_section.error}
+        <button onClick={() => refetch()}>{Translations.games_section.retry}</button>
       </div>
     );
   }
@@ -31,11 +31,11 @@ export const TrendingSection = () => {
   };
 
   return (
-    <TrendingContainer>
-      <h2>{Translations.trending_section.title}</h2>
+    <GamesContainer>
+      <h2>{Translations.games_section.title}</h2>
 
       <CardsContainer>
-        {trendingData?.map((media) => (
+        {gamesData?.map((media) => (
           <Card
             onClick={handleCardClick}
             onFavorite={handleCardFavorite}
@@ -45,6 +45,6 @@ export const TrendingSection = () => {
           />
         ))}
       </CardsContainer>
-    </TrendingContainer>
+    </GamesContainer>
   );
 };

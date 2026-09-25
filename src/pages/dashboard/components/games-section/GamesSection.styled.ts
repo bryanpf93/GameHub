@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const TrendingContainer = styled.div`
+export const GamesContainer = styled.div`
   width: 100%;
 `;
 

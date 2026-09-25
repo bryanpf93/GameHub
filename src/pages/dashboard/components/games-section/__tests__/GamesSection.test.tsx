@@ -3,12 +3,12 @@ import userEvent from "@testing-library/user-event";
 
 import Translations from "@/pages/dashboard/DashboardPage.translation.json";
 
-import { useTrendingList } from "../hooks/useTrendingList";
-import { TrendingSection } from "../TrendingSection";
+import { GamesSection } from "../GamesSection";
+import { useGamesList } from "../hooks/useGamesList";
 
-// mock useTrendingList
-jest.mock("../hooks/useTrendingList", () => ({
-  useTrendingList: jest.fn()
+// mock useGamesList
+jest.mock("../hooks/useGamesList", () => ({
+  useGamesList: jest.fn()
 }));
 
 // mock Card
@@ -16,12 +16,12 @@ jest.mock("../../card/Card", () => ({
   Card: jest.fn().mockImplementation(() => <div>Card</div>)
 }));
 
-describe("TrendingSection", () => {
-  const useTrendingListMock = jest.mocked(useTrendingList);
+describe("GamesSection", () => {
+  const useGamesListMock = jest.mocked(useGamesList);
 
-  it("should render the trending section", () => {
-    useTrendingListMock.mockReturnValue({
-      trendingData: [
+  it("should render the games section", () => {
+    useGamesListMock.mockReturnValue({
+      gamesData: [
         {
           id: "1",
           title: "Test",
@@ -33,44 +33,44 @@ describe("TrendingSection", () => {
       refetch: jest.fn()
     });
 
-    render(<TrendingSection />);
+    render(<GamesSection />);
 
-    const title = screen.getByRole("heading", { name: Translations.trending_section.title });
+    const title = screen.getByRole("heading", { name: Translations.games_section.title });
 
     expect(title).toBeInTheDocument();
   });
 
   it("should render the loading state", () => {
-    useTrendingListMock.mockReturnValue({
-      trendingData: undefined,
+    useGamesListMock.mockReturnValue({
+      gamesData: undefined,
       isLoading: true,
       error: null,
       refetch: jest.fn()
     });
 
-    render(<TrendingSection />);
+    render(<GamesSection />);
 
-    const loading = screen.getByText(Translations.trending_section.loading);
+    const loading = screen.getByText(Translations.games_section.loading);
 
     expect(loading).toBeInTheDocument();
   });
 
   it("should render the error state", async () => {
     const refetchMock = jest.fn();
-    useTrendingListMock.mockReturnValue({
-      trendingData: undefined,
+    useGamesListMock.mockReturnValue({
+      gamesData: undefined,
       isLoading: false,
       error: new Error("Error"),
       refetch: refetchMock
     });
 
-    render(<TrendingSection />);
+    render(<GamesSection />);
 
-    const error = screen.getByText(Translations.trending_section.error);
+    const error = screen.getByText(Translations.games_section.error);
 
     expect(error).toBeInTheDocument();
 
-    const retryButton = screen.getByRole("button", { name: Translations.trending_section.retry });
+    const retryButton = screen.getByRole("button", { name: Translations.games_section.retry });
     await userEvent.click(retryButton);
 
     expect(refetchMock).toHaveBeenCalled();

@@ -1,6 +1,6 @@
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 
-import { TrendingSection } from "./components/trending-section/TrendingSection";
+import { GamesSection } from "./components/games-section/GamesSection";
 
 export const DashboardPage = () => {
   useScrollToTop();
@@ -8,7 +8,7 @@ export const DashboardPage = () => {
   return (
     <div>
       <h1>Dashboard</h1>
-      <TrendingSection />
+      <GamesSection />
     </div>
   );
 };

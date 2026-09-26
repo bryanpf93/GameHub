@@ -1,9 +1,9 @@
-import type { Media } from "@/types/Media";
+import type { GameItem } from "@/types/GameItem";
 
 import { getGames } from "../games.service";
 import { GamesResponse } from "../types/GamesResponse";
 
-const mockTrendingItemResponse: GamesResponse = {
+const mockGameItemResponse: GamesResponse = {
   results: [
     {
       id: 1,
@@ -13,7 +13,7 @@ const mockTrendingItemResponse: GamesResponse = {
   ]
 };
 
-const mockMedia: Media[] = [
+const mockGameItem: GameItem[] = [
   {
     id: "1",
     title: "Test Game",
@@ -24,14 +24,14 @@ const mockMedia: Media[] = [
 // mock the api get con jest
 jest.mock("@/api/axios/axios", () => ({
   api: {
-    get: jest.fn().mockImplementation(() => Promise.resolve({ data: mockTrendingItemResponse }))
+    get: jest.fn().mockImplementation(() => Promise.resolve({ data: mockGameItemResponse }))
   }
 }));
 
 describe("trending.service", () => {
   it("should map trending items", async () => {
     const result = await getGames();
-    const expected = mockMedia;
+    const expected = mockGameItem;
 
     expect(result).toEqual(expected);
   });

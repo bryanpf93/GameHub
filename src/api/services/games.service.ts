@@ -1,9 +1,9 @@
 import { api } from "@/api/axios/axios";
-import type { Media } from "@/types/Media";
+import type { GameItem } from "@/types/GameItem";
 
 import { GameItemResponse, GamesResponse } from "./types/GamesResponse";
 
-const gameMapper = (item: GameItemResponse): Media => {
+const gameMapper = (item: GameItemResponse): GameItem => {
   return {
     id: item.id.toString(),
     title: item.name,
@@ -11,7 +11,7 @@ const gameMapper = (item: GameItemResponse): Media => {
   };
 };
 
-export const getGames = async (): Promise<Media[]> => {
+export const getGames = async (): Promise<GameItem[]> => {
   const response = await api.get<GamesResponse>("/games");
 
   return response.data.results.map((item) => gameMapper(item));

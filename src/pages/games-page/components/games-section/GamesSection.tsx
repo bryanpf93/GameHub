@@ -35,13 +35,13 @@ export const GamesSection = () => {
       <h2>{Translations.games_section.title}</h2>
 
       <CardsContainer>
-        {gamesData?.map((media) => (
+        {gamesData?.map((gameItem) => (
           <Card
             onClick={handleCardClick}
             onFavorite={handleCardFavorite}
-            key={media.id}
-            title={media.title}
-            poster={media.poster}
+            key={gameItem.id}
+            title={gameItem.title}
+            poster={gameItem.poster}
           />
         ))}
       </CardsContainer>

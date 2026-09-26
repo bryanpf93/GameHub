@@ -2,13 +2,8 @@ import { useScrollToTop } from "@/hooks/useScrollToTop";
 
 import { GamesSection } from "./components/games-section/GamesSection";
 
-export const DashboardPage = () => {
+export const GamesPage = () => {
   useScrollToTop();
 
-  return (
-    <div>
-      <h1>Dashboard</h1>
-      <GamesSection />
-    </div>
-  );
+  return <GamesSection />;
 };

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import Translations from "@/pages/dashboard/DashboardPage.translation.json";
+import Translations from "@/pages/games-page/GamesPage.translation.json";
 
 import { GamesSection } from "../GamesSection";
 import { useGamesList } from "../hooks/useGamesList";

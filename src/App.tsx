@@ -1,15 +1,18 @@
-import "./App.css";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Route, Routes } from "react-router-dom";
 
-import { DashboardPage } from "@/pages/dashboard/DashboardPage";
+import { GamesPage } from "@/pages/games-page/GamesPage";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <DashboardPage />
+      <h1>GAMEHUB</h1>
+      <Routes>
+        <Route path="/" element={<h1>Home Page</h1>} />
+        <Route path="/games" element={<GamesPage />} />
+      </Routes>
     </QueryClientProvider>
   );
 };

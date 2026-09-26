@@ -1,4 +1,4 @@
-import Translations from "../../DashboardPage.translation.json";
+import Translations from "../../GamesPage.translation.json";
 import { Card } from "../card/Card";
 import { CardsContainer, GamesContainer } from "./GamesSection.styled";
 import { useGamesList } from "./hooks/useGamesList";

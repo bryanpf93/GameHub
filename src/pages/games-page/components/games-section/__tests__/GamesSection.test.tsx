@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router-dom";
 
 import Translations from "@/pages/games-page/GamesPage.translation.json";
 
@@ -19,6 +20,14 @@ jest.mock("../../card/Card", () => ({
 describe("GamesSection", () => {
   const useGamesListMock = jest.mocked(useGamesList);
 
+  const renderGamesSection = () => {
+    return render(
+      <MemoryRouter>
+        <GamesSection />
+      </MemoryRouter>
+    );
+  };
+
   it("should render the games section", () => {
     useGamesListMock.mockReturnValue({
       gamesData: [
@@ -33,8 +42,7 @@ describe("GamesSection", () => {
       refetch: jest.fn()
     });
 
-    render(<GamesSection />);
-
+    renderGamesSection();
     const title = screen.getByRole("heading", { name: Translations.games_section.title });
 
     expect(title).toBeInTheDocument();
@@ -48,7 +56,7 @@ describe("GamesSection", () => {
       refetch: jest.fn()
     });
 
-    render(<GamesSection />);
+    renderGamesSection();
 
     const loading = screen.getByText(Translations.games_section.loading);
 
@@ -64,7 +72,7 @@ describe("GamesSection", () => {
       refetch: refetchMock
     });
 
-    render(<GamesSection />);
+    renderGamesSection();
 
     const error = screen.getByText(Translations.games_section.error);
 

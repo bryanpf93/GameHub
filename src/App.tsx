@@ -10,8 +10,10 @@ const queryClient = new QueryClient();
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Link to={"/games"}>
-        <h1 className="logo">GAMEHUB</h1>
+      <Link aria-label="home-link" to={"/games"}>
+        <h1 aria-label="logo-label" className="logo">
+          GAMEHUB
+        </h1>
       </Link>
       <Routes>
         <Route path="/" element={<h1>Home Page</h1>} />

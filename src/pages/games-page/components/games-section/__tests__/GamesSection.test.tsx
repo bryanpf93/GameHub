@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter } from "react-router-dom";
 
 import Translations from "@/pages/games-page/GamesPage.translation.json";
+import { renderWithRouter } from "@/test/render";
 
 import { GamesSection } from "../GamesSection";
 import { useGamesList } from "../hooks/useGamesList";
@@ -21,11 +21,7 @@ describe("GamesSection", () => {
   const useGamesListMock = jest.mocked(useGamesList);
 
   const renderGamesSection = () => {
-    return render(
-      <MemoryRouter>
-        <GamesSection />
-      </MemoryRouter>
-    );
+    return renderWithRouter(<GamesSection />);
   };
 
   it("should render the games section", () => {

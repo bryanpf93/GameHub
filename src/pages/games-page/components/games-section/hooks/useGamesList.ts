@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { getGames } from "@/api/services/games.service";
-import type { Media } from "@/types/Media";
+import type { GameItem } from "@/types/GameItem";
 
 type UseGamesListReturn = {
-  gamesData?: Media[];
+  gamesData?: GameItem[];
   isLoading: boolean;
   error: Error | null;
   refetch: () => void;
 };
 
 export const useGamesList = (): UseGamesListReturn => {
-  const query = useQuery<Media[]>({
+  const query = useQuery<GameItem[]>({
     queryKey: ["games"],
     queryFn: getGames
   });

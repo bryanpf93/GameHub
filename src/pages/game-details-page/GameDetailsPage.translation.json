@@ -1,0 +1,8 @@
+{
+  "title": "GameDetails",
+  "game_details_section": {
+    "loading": "Cargando juego...",
+    "error": "Error al carga el juego",
+    "retry": "Reintentar"
+  }
+}

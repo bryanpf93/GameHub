@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import Translations from "../../GamesPage.translation.json";
 import { Card } from "../card/Card";
 import { CardsContainer, GamesContainer } from "./GamesSection.styled";
@@ -5,6 +7,7 @@ import { useGamesList } from "./hooks/useGamesList";
 
 export const GamesSection = () => {
   const { gamesData, isLoading, error, refetch } = useGamesList();
+  const navigate = useNavigate();
 
   if (isLoading) {
     return <div>{Translations.games_section.loading}</div>;
@@ -19,9 +22,8 @@ export const GamesSection = () => {
     );
   }
 
-  const handleCardClick = () => {
-    // navegar a detalle
-    //console.log("Card clicked:");
+  const handleCardClick = (gameId: string) => {
+    navigate(`/games/${gameId}`);
   };
 
   const handleCardFavorite = () => {
@@ -37,7 +39,7 @@ export const GamesSection = () => {
       <CardsContainer>
         {gamesData?.map((gameItem) => (
           <Card
-            onClick={handleCardClick}
+            onClick={() => handleCardClick(gameItem.id)}
             onFavorite={handleCardFavorite}
             key={gameItem.id}
             title={gameItem.title}

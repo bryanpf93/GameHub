@@ -1,6 +1,6 @@
+import { api } from "@/api/axios/axios";
 import { GameDetail } from "@/types/GameDetail";
 
-import { api } from "../axios/axios";
 import { GameDetailResponse } from "./types/GameDetailResponse";
 
 const gameDetailMapper = (item: GameDetailResponse): GameDetail => {

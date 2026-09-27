@@ -7,14 +7,16 @@ import { renderWithRouter } from "@/test/render";
 import { GamesSection } from "../GamesSection";
 import { useGamesList } from "../hooks/useGamesList";
 
+// mock useNavigate
+const mockNavigate = jest.fn();
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: jest.fn().mockImplementation(() => mockNavigate),
+}));
+
 // mock useGamesList
 jest.mock("../hooks/useGamesList", () => ({
   useGamesList: jest.fn()
-}));
-
-// mock Card
-jest.mock("../../card/Card", () => ({
-  Card: jest.fn().mockImplementation(() => <div>Card</div>)
 }));
 
 describe("GamesSection", () => {
@@ -78,5 +80,28 @@ describe("GamesSection", () => {
     await userEvent.click(retryButton);
 
     expect(refetchMock).toHaveBeenCalled();
+  });
+
+  it("should navigate when click card", async () => {
+    useGamesListMock.mockReturnValue({
+      gamesData: [
+        {
+          id: "1",
+          title: "Test",
+          poster: "/test.jpg"
+        }
+      ],
+      isLoading: false,
+      error: null,
+      refetch: jest.fn()
+    });
+
+    renderGamesSection();
+
+    const detailButton = screen.getByRole("button", { name: "Watch" });
+    await userEvent.click(detailButton);
+
+    //expect(mockNavigate).toHaveBeenCalled();
+    expect(mockNavigate).toHaveBeenCalledWith("/games/1")
   });
 });

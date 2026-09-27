@@ -20,7 +20,7 @@ export const GameDetailsSection = () => {
     return (
       <div>
         {Translations.game_details_section.error}
-        <button onClick={() => refetch}>{Translations.game_details_section.retry}</button>
+        <button onClick={() => refetch()}>{Translations.game_details_section.retry}</button>
       </div>
     );
   }
@@ -32,10 +32,10 @@ export const GameDetailsSection = () => {
   return (
     <GameDetailsContainer>
       <GameHeader
-        title={gameData?.title}
-        poster={gameData?.poster}
-        rating={gameData?.rating}
-        released_date={gameData?.released_date}
+        title={gameData.title}
+        poster={gameData.poster}
+        rating={gameData.rating}
+        released_date={gameData.released_date}
       />
 
       <GameInfo

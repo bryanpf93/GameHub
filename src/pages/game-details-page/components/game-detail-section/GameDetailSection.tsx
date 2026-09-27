@@ -1,6 +1,10 @@
 import { useParams } from "react-router-dom";
 
 import Translations from "../../GameDetailsPage.translation.json";
+import { GameDescrition } from "../game-description/GameDescription";
+import { GameHeader } from "../game-header/GameHeader";
+import { GameInfo } from "../game-info/GameInfo";
+import { GameDetailsContainer } from "./GameDetailSection.styled";
 import { useGameDetails } from "./hooks/useGameDetails";
 
 export const GameDetailsSection = () => {
@@ -21,5 +25,26 @@ export const GameDetailsSection = () => {
     );
   }
 
-  return <div>{gameData?.title}</div>;
+  if (!gameData) {
+    return null;
+  }
+
+  return (
+    <GameDetailsContainer>
+      <GameHeader
+        title={gameData?.title}
+        poster={gameData?.poster}
+        rating={gameData?.rating}
+        released_date={gameData?.released_date}
+      />
+
+      <GameInfo
+        genres={gameData.genres}
+        platforms={gameData.platforms}
+        developers={gameData.developers}
+      />
+
+      <GameDescrition description={gameData.description} />
+    </GameDetailsContainer>
+  );
 };

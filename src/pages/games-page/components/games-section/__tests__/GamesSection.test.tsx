@@ -11,7 +11,7 @@ import { useGamesList } from "../hooks/useGamesList";
 const mockNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
-  useNavigate: jest.fn().mockImplementation(() => mockNavigate),
+  useNavigate: jest.fn().mockImplementation(() => mockNavigate)
 }));
 
 // mock useGamesList
@@ -102,6 +102,28 @@ describe("GamesSection", () => {
     await userEvent.click(detailButton);
 
     //expect(mockNavigate).toHaveBeenCalled();
-    expect(mockNavigate).toHaveBeenCalledWith("/games/1")
+    expect(mockNavigate).toHaveBeenCalledWith("/games/1");
+  });
+  it("should search games when typing", async () => {
+    useGamesListMock.mockReturnValue({
+      gamesData: [
+        {
+          id: "1",
+          title: "Test",
+          poster: "/test.jpg"
+        }
+      ],
+      isLoading: false,
+      error: null,
+      refetch: jest.fn()
+    });
+
+    renderGamesSection();
+
+    const searchInput = screen.getByPlaceholderText("Buscar juego...");
+
+    await userEvent.type(searchInput, "zelda");
+
+    expect(useGamesListMock).toHaveBeenLastCalledWith("zelda");
   });
 });

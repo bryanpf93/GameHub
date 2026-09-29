@@ -9,7 +9,7 @@ jest.mock("@/api/services/games.service", () => ({
 
 describe("useGamesList", () => {
   it("should return games data", () => {
-    const { result } = renderHook(() => useGamesList());
+    const { result } = renderHook(() => useGamesList(""));
 
     expect(result.current.gamesData).toBeDefined();
     expect(result.current.isLoading).toBe(false);

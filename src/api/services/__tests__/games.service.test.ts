@@ -30,7 +30,7 @@ jest.mock("@/api/axios/axios", () => ({
 
 describe("trending.service", () => {
   it("should map trending items", async () => {
-    const result = await getGames();
+    const result = await getGames("test");
     const expected = mockGameItem;
 
     expect(result).toEqual(expected);

@@ -11,8 +11,12 @@ const gameMapper = (item: GameItemResponse): GameItem => {
   };
 };
 
-export const getGames = async (): Promise<GameItem[]> => {
-  const response = await api.get<GamesResponse>("/games");
+export const getGames = async (search: string): Promise<GameItem[]> => {
+  const response = await api.get<GamesResponse>("/games", {
+    params: {
+      search
+    }
+  });
 
   return response.data.results.map((item) => gameMapper(item));
 };

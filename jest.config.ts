@@ -33,6 +33,7 @@ const config: Config = {
       statements: 70
     }
   },
+  coveragePathIgnorePatterns: ["/node_modules/", "/dist/", "\\.styled\\.ts$"],
 
   testPathIgnorePatterns: ["/node_modules/", "/dist/"]
 };

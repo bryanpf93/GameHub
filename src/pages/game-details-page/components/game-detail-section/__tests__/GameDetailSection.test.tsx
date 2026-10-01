@@ -71,4 +71,17 @@ describe("GameDetailSection", () => {
 
     expect(refetchMock).toHaveBeenCalled();
   });
+
+  it("should return null when there is no game data", () => {
+    mockUseGameDetails.mockReturnValue({
+      gameData: undefined,
+      isLoading: false,
+      error: null,
+      refetch: jest.fn()
+    });
+
+    const { container } = renderWithRouter(<GameDetailsSection />);
+
+    expect(container.firstChild).toBeNull();
+  });
 });

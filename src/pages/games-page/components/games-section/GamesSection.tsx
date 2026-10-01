@@ -1,17 +1,16 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Translations from "../../GamesPage.translation.json";
 import { Card } from "../card/Card";
+import { Search } from "../search/Search";
 import { CardsContainer, GamesContainer } from "./GamesSection.styled";
 import { useGamesList } from "./hooks/useGamesList";
 
 export const GamesSection = () => {
-  const { gamesData, isLoading, error, refetch } = useGamesList();
+  const [search, setSearch] = useState("");
+  const { gamesData, isLoading, error, refetch } = useGamesList(search);
   const navigate = useNavigate();
-
-  if (isLoading) {
-    return <div>{Translations.games_section.loading}</div>;
-  }
 
   if (error) {
     return (
@@ -36,17 +35,23 @@ export const GamesSection = () => {
     <GamesContainer>
       <h2>{Translations.games_section.title}</h2>
 
-      <CardsContainer>
-        {gamesData?.map((gameItem) => (
-          <Card
-            onClick={() => handleCardClick(gameItem.id)}
-            onFavorite={handleCardFavorite}
-            key={gameItem.id}
-            title={gameItem.title}
-            poster={gameItem.poster}
-          />
-        ))}
-      </CardsContainer>
+      <Search onSearch={setSearch} search={search} />
+
+      {isLoading ? (
+        <div>{Translations.games_section.loading}</div>
+      ) : (
+        <CardsContainer>
+          {gamesData?.map((gameItem) => (
+            <Card
+              onClick={() => handleCardClick(gameItem.id)}
+              onFavorite={handleCardFavorite}
+              key={gameItem.id}
+              title={gameItem.title}
+              poster={gameItem.poster}
+            />
+          ))}
+        </CardsContainer>
+      )}
     </GamesContainer>
   );
 };

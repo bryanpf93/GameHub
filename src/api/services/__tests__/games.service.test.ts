@@ -1,3 +1,4 @@
+import { api } from "@/api/axios/axios";
 import type { GameItem } from "@/types/GameItem";
 
 import { getGames } from "../games.service";
@@ -30,9 +31,27 @@ jest.mock("@/api/axios/axios", () => ({
 
 describe("trending.service", () => {
   it("should map trending items", async () => {
-    const result = await getGames();
+    const result = await getGames("test");
     const expected = mockGameItem;
 
     expect(result).toEqual(expected);
+  });
+
+  it("should use an empty poster when there is no background image", async () => {
+    jest.mocked(api.get).mockResolvedValue({
+      data: {
+        results: [
+          {
+            id: 1,
+            name: "Test Game",
+            background_image: undefined
+          }
+        ]
+      }
+    });
+
+    const result = await getGames("test");
+
+    expect(result[0].poster).toBe("");
   });
 });

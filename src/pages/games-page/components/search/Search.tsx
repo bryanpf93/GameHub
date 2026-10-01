@@ -1,5 +1,3 @@
-import React from "react";
-
 import { SearchContainerStyled, SearchInputStyled } from "./Search.styled";
 
 interface SearchProps {
@@ -14,7 +12,7 @@ export const Search = ({ search, onSearch }: SearchProps) => {
         type="text"
         value={search}
         placeholder="Buscar juego..."
-        onChange={(event) => onSearch(event.target.value)}
+        onChange={(event) => onSearch(event.target.value.toLocaleLowerCase())}
       />
     </SearchContainerStyled>
   );

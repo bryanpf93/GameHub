@@ -24,7 +24,7 @@ describe("useGamesList", () => {
       refetch: jest.fn()
     } as unknown as ReturnType<typeof useQuery>);
 
-    const { result } = renderHook(() => useGamesList(""));
+    const { result } = renderHook(() => useGamesList("", 1));
 
     expect(result.current.gamesData).toEqual([
       {
@@ -48,17 +48,18 @@ describe("useGamesList", () => {
       refetch: jest.fn()
     } as unknown as ReturnType<typeof useQuery>);
 
-    const { rerender } = renderHook(({ search }) => useGamesList(search), {
+    const { rerender } = renderHook(({ search, page }) => useGamesList(search, page), {
       initialProps: {
-        search: ""
+        search: "",
+        page: 1
       }
     });
 
-    rerender({ search: "zelda" });
+    rerender({ search: "zelda", page: 1 });
 
     const queryCallBeforeDebounce = mockUseQuery.mock.calls.at(-1)?.[0];
 
-    expect(queryCallBeforeDebounce?.queryKey).toEqual(["games", ""]);
+    expect(queryCallBeforeDebounce?.queryKey).toEqual(["games", "", 1]);
 
     act(() => {
       jest.advanceTimersByTime(500);
@@ -66,7 +67,7 @@ describe("useGamesList", () => {
 
     const queryCallAfterDebounce = mockUseQuery.mock.calls.at(-1)?.[0];
 
-    expect(queryCallAfterDebounce?.queryKey).toEqual(["games", "zelda"]);
+    expect(queryCallAfterDebounce?.queryKey).toEqual(["games", "zelda", 1]);
 
     jest.useRealTimers();
   });
@@ -83,14 +84,15 @@ describe("useGamesList", () => {
       refetch: jest.fn()
     } as unknown as ReturnType<typeof useQuery>);
 
-    const { rerender } = renderHook(({ search }) => useGamesList(search), {
+    const { rerender } = renderHook(({ search, page }) => useGamesList(search, page), {
       initialProps: {
-        search: ""
+        search: "",
+        page: 1
       }
     });
 
     act(() => {
-      rerender({ search: "zelda" });
+      rerender({ search: "zelda", page: 1 });
     });
 
     expect(clearTimeoutSpy).toHaveBeenCalled();

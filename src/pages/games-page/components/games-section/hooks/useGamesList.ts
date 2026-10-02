@@ -11,7 +11,7 @@ type UseGamesListReturn = {
   refetch: () => void;
 };
 
-export const useGamesList = (search: string): UseGamesListReturn => {
+export const useGamesList = (search: string, page: number): UseGamesListReturn => {
   const [debouncedSearch, setDebouncedSearch] = useState(search);
 
   useEffect(() => {
@@ -24,8 +24,8 @@ export const useGamesList = (search: string): UseGamesListReturn => {
   }, [search]);
 
   const query = useQuery<GameItem[]>({
-    queryKey: ["games", debouncedSearch],
-    queryFn: () => getGames(debouncedSearch)
+    queryKey: ["games", debouncedSearch, page],
+    queryFn: () => getGames(debouncedSearch, page)
   });
   const { data: gamesData, isLoading, error, refetch } = query;
 

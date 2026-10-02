@@ -29,9 +29,9 @@ jest.mock("@/api/axios/axios", () => ({
   }
 }));
 
-describe("trending.service", () => {
-  it("should map trending items", async () => {
-    const result = await getGames("test");
+describe("games.service", () => {
+  it("should map game items", async () => {
+    const result = await getGames("test", 1);
     const expected = mockGameItem;
 
     expect(result).toEqual(expected);
@@ -50,8 +50,19 @@ describe("trending.service", () => {
       }
     });
 
-    const result = await getGames("test");
+    const result = await getGames("test", 1);
 
     expect(result[0].poster).toBe("");
+  });
+
+  it("should send search and page params", async () => {
+    await getGames("test", 3);
+
+    expect(api.get).toHaveBeenCalledWith("/games", {
+      params: {
+        search: "test",
+        page: 3
+      }
+    });
   });
 });

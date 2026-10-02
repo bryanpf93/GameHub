@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 
 import Translations from "../../GamesPage.translation.json";
 import { Card } from "../card/Card";
+import { Pagination } from "../pagination/Pagination";
 import { Search } from "../search/Search";
 import { CardsContainer, GamesContainer } from "./GamesSection.styled";
 import { useGamesList } from "./hooks/useGamesList";
 
 export const GamesSection = () => {
   const [search, setSearch] = useState("");
-  const { gamesData, isLoading, error, refetch } = useGamesList(search);
+  const [page, setPage] = useState(1);
+  const { gamesData, isLoading, error, refetch } = useGamesList(search, page);
   const navigate = useNavigate();
 
   if (error) {
@@ -29,6 +31,14 @@ export const GamesSection = () => {
     // handle favorite
     // api {favorite: true/false}
     //console.log("Card favorite:");
+  };
+
+  const handlePreviousPage = () => {
+    setPage((currentPage) => Math.max(currentPage - 1, 1));
+  };
+
+  const handleNextPage = () => {
+    setPage((currentPage) => currentPage + 1);
   };
 
   return (
@@ -52,6 +62,8 @@ export const GamesSection = () => {
           ))}
         </CardsContainer>
       )}
+
+      <Pagination onNextPage={handleNextPage} onPreviousPage={handlePreviousPage} page={page} />
     </GamesContainer>
   );
 };

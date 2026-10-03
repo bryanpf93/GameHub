@@ -30,7 +30,7 @@ export const useGamesList = (search: string, page: number): UseGamesListReturn =
 
   const query = useQuery<GamesData>({
     queryKey: ["games", debouncedSearch, page],
-    queryFn: () => getGames(debouncedSearch, page)
+    queryFn: () => getGames(page, debouncedSearch)
   });
   const { data: gamesData, isLoading, error, refetch } = query;
 

@@ -28,13 +28,16 @@ describe("GamesSection", () => {
 
   it("should render the games section", () => {
     useGamesListMock.mockReturnValue({
-      gamesData: [
-        {
-          id: "1",
-          title: "Test",
-          poster: "/test.jpg"
-        }
-      ],
+      gamesData: {
+        games: [
+          {
+            id: "1",
+            title: "Test",
+            poster: "/test.jpg"
+          }
+        ],
+        next: null
+      },
       isLoading: false,
       error: null,
       refetch: jest.fn()
@@ -84,13 +87,16 @@ describe("GamesSection", () => {
 
   it("should navigate when click card", async () => {
     useGamesListMock.mockReturnValue({
-      gamesData: [
-        {
-          id: "1",
-          title: "Test",
-          poster: "/test.jpg"
-        }
-      ],
+      gamesData: {
+        games: [
+          {
+            id: "1",
+            title: "Test",
+            poster: "/test.jpg"
+          }
+        ],
+        next: null
+      },
       isLoading: false,
       error: null,
       refetch: jest.fn()
@@ -106,13 +112,16 @@ describe("GamesSection", () => {
   });
   it("should search games when typing", async () => {
     useGamesListMock.mockReturnValue({
-      gamesData: [
-        {
-          id: "1",
-          title: "Test",
-          poster: "/test.jpg"
-        }
-      ],
+      gamesData: {
+        games: [
+          {
+            id: "1",
+            title: "Test",
+            poster: "/test.jpg"
+          }
+        ],
+        next: null
+      },
       isLoading: false,
       error: null,
       refetch: jest.fn()
@@ -124,6 +133,6 @@ describe("GamesSection", () => {
 
     await userEvent.type(searchInput, "zelda");
 
-    expect(useGamesListMock).toHaveBeenLastCalledWith("zelda");
+    expect(useGamesListMock).toHaveBeenLastCalledWith("zelda", 1);
   });
 });

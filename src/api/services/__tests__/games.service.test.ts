@@ -1,5 +1,4 @@
 import { api } from "@/api/axios/axios";
-import type { GameItem } from "@/types/GameItem";
 
 import { getGames } from "../games.service";
 import { GamesResponse } from "../types/GamesResponse";
@@ -11,16 +10,20 @@ const mockGameItemResponse: GamesResponse = {
       name: "Test Game",
       background_image: "https://example.com/test.jpg"
     }
-  ]
+  ],
+  next: null
 };
 
-const mockGameItem: GameItem[] = [
-  {
-    id: "1",
-    title: "Test Game",
-    poster: "https://example.com/test.jpg"
-  }
-];
+const mockGameItem = {
+  games: [
+    {
+      id: "1",
+      title: "Test Game",
+      poster: "https://example.com/test.jpg"
+    }
+  ],
+  next: null
+};
 
 // mock the api get con jest
 jest.mock("@/api/axios/axios", () => ({
@@ -31,7 +34,7 @@ jest.mock("@/api/axios/axios", () => ({
 
 describe("games.service", () => {
   it("should map game items", async () => {
-    const result = await getGames("test", 1);
+    const result = await getGames(1);
     const expected = mockGameItem;
 
     expect(result).toEqual(expected);
@@ -46,17 +49,18 @@ describe("games.service", () => {
             name: "Test Game",
             background_image: undefined
           }
-        ]
+        ],
+        next: null
       }
     });
 
-    const result = await getGames("test", 1);
+    const result = await getGames(1);
 
-    expect(result[0].poster).toBe("");
+    expect(result.games[0].poster).toBe("");
   });
 
   it("should send search and page params", async () => {
-    await getGames("test", 3);
+    await getGames(3, "test");
 
     expect(api.get).toHaveBeenCalledWith("/games", {
       params: {

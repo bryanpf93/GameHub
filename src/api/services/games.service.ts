@@ -11,7 +11,10 @@ const gameMapper = (item: GameItemResponse): GameItem => {
   };
 };
 
-export const getGames = async (search: string, page: number): Promise<GameItem[]> => {
+export const getGames = async (
+  search: string,
+  page: number
+): Promise<{ games: GameItem[]; next: string | null }> => {
   const response = await api.get<GamesResponse>("/games", {
     params: {
       search,
@@ -19,5 +22,8 @@ export const getGames = async (search: string, page: number): Promise<GameItem[]
     }
   });
 
-  return response.data.results.map((item) => gameMapper(item));
+  return {
+    games: response.data.results.map((item) => gameMapper(item)),
+    next: response.data.next
+  };
 };

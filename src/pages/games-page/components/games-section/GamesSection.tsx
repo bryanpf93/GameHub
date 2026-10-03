@@ -51,7 +51,7 @@ export const GamesSection = () => {
         <div>{Translations.games_section.loading}</div>
       ) : (
         <CardsContainer>
-          {gamesData?.map((gameItem) => (
+          {gamesData?.games.map((gameItem) => (
             <Card
               onClick={() => handleCardClick(gameItem.id)}
               onFavorite={handleCardFavorite}
@@ -63,7 +63,12 @@ export const GamesSection = () => {
         </CardsContainer>
       )}
 
-      <Pagination onNextPage={handleNextPage} onPreviousPage={handlePreviousPage} page={page} />
+      <Pagination
+        onNextPage={handleNextPage}
+        onPreviousPage={handlePreviousPage}
+        page={page}
+        hasNextPage={Boolean(gamesData?.next)}
+      />
     </GamesContainer>
   );
 };

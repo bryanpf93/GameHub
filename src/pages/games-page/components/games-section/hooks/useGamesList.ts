@@ -4,14 +4,19 @@ import { useEffect, useState } from "react";
 import { getGames } from "@/api/services/games.service";
 import type { GameItem } from "@/types/GameItem";
 
+type GamesData = {
+  games: GameItem[];
+  next: string | null;
+};
+
 type UseGamesListReturn = {
-  gamesData?: GameItem[];
+  gamesData?: GamesData;
   isLoading: boolean;
   error: Error | null;
   refetch: () => void;
 };
 
-export const useGamesList = (search: string): UseGamesListReturn => {
+export const useGamesList = (search: string, page: number): UseGamesListReturn => {
   const [debouncedSearch, setDebouncedSearch] = useState(search);
 
   useEffect(() => {
@@ -23,9 +28,9 @@ export const useGamesList = (search: string): UseGamesListReturn => {
     };
   }, [search]);
 
-  const query = useQuery<GameItem[]>({
-    queryKey: ["games", debouncedSearch],
-    queryFn: () => getGames(debouncedSearch)
+  const query = useQuery<GamesData>({
+    queryKey: ["games", debouncedSearch, page],
+    queryFn: () => getGames(page, debouncedSearch)
   });
   const { data: gamesData, isLoading, error, refetch } = query;
 

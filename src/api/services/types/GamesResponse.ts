@@ -6,4 +6,5 @@ export type GameItemResponse = {
 
 export type GamesResponse = {
   results: GameItemResponse[];
+  next: string | null;
 };
